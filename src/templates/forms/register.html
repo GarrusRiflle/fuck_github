@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% block login %}
+	<div class="span4 offset4" style="margin-top: 30px;">
+		<legend>Регистрация</legend>
+		<form method="POST" action="/auth/register/" accept-charset="UTF-8" style="margin-left: 250px">
+			{% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <fieldset style="width: 300px;">
+                <p>
+                    {{ form.username }}
+                </p>
+                <p>
+                    {{ form.email }}
+                </p>
+                <p>
+                    {{ form.password }}
+                </p>
+                <p>
+                    {{ form.password1 }}
+                </p>
+                <button type="submit" class="btn btn-success" style="float: right;">Регистрация</button>
+            </fieldset>
+		</form>    
+	</div>
+{% endblock %}

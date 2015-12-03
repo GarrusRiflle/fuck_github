@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block main_content %}
+	{% include "patterns/question_pattern.html" %}
+	{% for comment in comments %}
+		{% include "patterns/comments_pattern.html" %}
+	{% endfor %}
+	{% if username %}
+		<form action="/question/addcomment/{{ question.id }}/" method="post" style="margin: 30px 0 0 30px;">
+			{% csrf_token %}
+            <textarea type="text" id="comment" class="span4" name="comment" placeholder="Ваш комментарий" style="display: block; margin: 10px 0; height: 100px; width: 630px;"></textarea>
+			<input type="submit" class="btn btn-primary" value="Отправить"></button>
+		</form>
+	{% endif %}
+{% endblock %}

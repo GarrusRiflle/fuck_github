@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block login %}
+	<div class="span4 offset4" style="margin-top: 30px;">
+		<legend>Пожалуйста, авторизуйтесь</legend>
+		<form method="POST" action="/auth/login/" accept-charset="UTF-8" style="margin-left: 250px; margin-top: 50px;">
+			{% csrf_token %}
+			<input type="text" id="username" class="span4" name="username" placeholder="Логин"  style="display: block; margin: 10px 0; height: 35px; width: 200px;">
+			<input type="password" id="password" class="span4" name="password" placeholder="Пароль" style="display: block; margin: 10px 0; height: 35px; width: 200px;">
+			{% if login_error %}
+				<label class="error" style="display: block">{{ login_error }}</label>
+			{% endif %}
+			<a href="/auth/register/" style="margin: 0 0 0 120px;">Нет логина?</a>
+			<button type="submit" name="submit" class="btn btn-info btn-block" style="width: 200px; margin-top: 10px;">Войти</button>
+		</form>    
+	</div>
+{% endblock %}

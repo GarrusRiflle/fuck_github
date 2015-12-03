@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block main_content %}
+	<h1>New Questions<a href="/top/" style="margin-left: 15px; font-size:14pt;">Top Questions</a></h1>
+	{% for question in questions %}
+		{% include "patterns/question_pattern.html" %}	
+	{% endfor %}
+
+{% if is_paginated %}
+	<ul class="pagination" text-align="center">
+		{% if page_obj.has_previous %}
+		    <li>
+		        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+		    </li>
+		{% endif %}
+		    <li class="">
+        		<span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+		    </li>
+		{% if page_obj.has_next %}
+		    <li>
+        		<span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+		    </li>
+		{% endif %}
+	</ul>
+{% endif %}
+{% endblock %}

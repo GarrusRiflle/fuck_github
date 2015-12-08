@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -9,29 +10,34 @@ data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/new/">
-                <img style="margin-top: -15px;" src="/images/logo.png">
+                <img style="margin-top: -15px;" src="{% static 'static/images/logo.png' %}">
           </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-                <input type="text" style="width: 300px;" class="form-control" placeholder="Найти">
+                <input type="text" name="q" style="width: 300px;" class="form-control" placeholder="Найти">
             </div>
-            <button type="submit" class="btn btn-default">Поиск</button>
-                <a href="/question/add/" role="button" class="btn btn-success" style="margin-left: 3px;">Задать вопрос</a>
+            <button disabled="disabled" type="submit" class="btn btn-default">Поиск</button>
+
+              {% if USER.username %}
+                <a href="/question/add/" role="button" class="btn btn-success">Задать вопрос</a>
+              {% endif %}
           </form>
           <ul class="nav navbar-nav navbar-right">
-                {% if username %}
-                   <li><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-top: 10px; min-width: 100px;">{{ username }}<span class="caret"></span></button>
-                       <ul class="dropdown-menu" style="min-width: 234px;">
-                   		  <li role="presentation"></span><a role="menuitem" tabindex="-1" href="#">Профиль</a></li>
-	                      <li role="presentation"></span><a role="menuitem" tabindex="-1" href="#">Настройки</a></li>
+                {% if user.username %}
+                   <li><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-top: 10px; min-width: 100px;">{{ USER.username }}<span class="caret" style="margin-left: 10px"></span></button>
+                       <ul class="dropdown-menu" style="min-width: 10px;">
+                   		  <li role="presentation"></span><a role="menuitem" tabindex="-1" href="/{{ username }}/">Профиль</a></li>
+                          <li role="presentation"></span><a role="menuitem" tabindex="-1" href="/profile/questions/">Мои вопросы</a></li>
+                          <li role="presentation"></span><a role="menuitem" tabindex="-1" href="/profile/answers/">Мои ответы</a></li>
+	                      <li role="presentation"></span><a role="menuitem" tabindex="-1" href="/profile/settings/">Настройки</a></li>
        	 	              <li class="divider"></li>
-                          <li role="presentation"></span><a href="/auth/logout/" role="menuitem" tabindex="-1">Выход</a></li>
+                          <li role="presentation"></span><a href="/profile/logout/" role="menuitem" tabindex="-1">Выход</a></li>
                        </ul>
                 {% else %}
-                   <li><a href="/auth/login/" role="button" class="btn">Войти</a></li>
-                   <li><a href="/auth/register/" role="button" class="btn">Регистрация</a></li>
+                   <li><a href="/profile/login/" role="button" class="btn">Войти</a></li>
+                   <li><a href="/profile/register/" role="button" class="btn">Регистрация</a></li>
                 {% endif %}
           </ul>
         </div>

@@ -1,7 +1,9 @@
 {% extends 'main.html' %}
 
+{% block title %} Вопросы по тегу {% endblock %}
+
 {% block main_content %}
-    <h1>Tag Questions<a href="/new/" style="margin-left: 15px; font-size:14pt;">New Questions</a></h1>
+    <h1>Tag Questions<a href="/new/" style="margin-left: 15px; font-size:14pt;">New Questions</a><a href="/top/" style="margin-left: 15px; font-size:14pt;">Top Questions</a></h1>
 {% for question in questions %}
     {% include "patterns/question_pattern.html" %}
 {% endfor %}

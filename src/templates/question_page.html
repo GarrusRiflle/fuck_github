@@ -1,15 +1,24 @@
 {% extends 'main.html' %}
 
+{% block title %}{{ question.title }}{% endblock %}
+
 {% block main_content %}
 	{% include "patterns/question_pattern.html" %}
 	{% for comment in comments %}
 		{% include "patterns/comments_pattern.html" %}
 	{% endfor %}
-	{% if username %}
+	{% if USER.username %}
 		<form action="/question/addcomment/{{ question.id }}/" method="post" style="margin: 30px 0 0 30px;">
 			{% csrf_token %}
-            <textarea type="text" id="comment" class="span4" name="comment" placeholder="Ваш комментарий" style="display: block; margin: 10px 0; height: 100px; width: 630px;"></textarea>
-			<input type="submit" class="btn btn-primary" value="Отправить"></button>
+            <fieldset style="width: 640px;">
+                <p>{{ form.text }}</p>
+                <input type="submit" class="btn btn-primary" value="Отправить"></button>
+            </fieldset>
 		</form>
+    {% else %}
+        <div class="alert alert-danger" role="alert" style="width: 700px; margin-top: 30px;">
+            Чтобы оставить ответ, нужно сначала
+            <a href="/profile/login/" class="alert-link">авторизоваться</a>
+        </div>
 	{% endif %}
 {% endblock %}

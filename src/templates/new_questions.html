@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 
+{% block title %} Новые вопросы {% endblock %}
+
 {% block main_content %}
 	<h1>New Questions<a href="/top/" style="margin-left: 15px; font-size:14pt;">Top Questions</a></h1>
 	{% for question in questions %}

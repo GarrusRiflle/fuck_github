@@ -1,0 +1,31 @@
+{% block sidebar %}
+<div class="sidebar-module" style="margin-top:30px;">
+    <h3>Лучшие пользователи:</h3>
+    <div style="height: 300px; border: 3px solid black;">
+    {% if top_users %}
+        <table style="width:100%; height:100%">
+            <tr>
+                <td style="padding-left:20px">Пользователь</td>
+                <td>Рейтинг</td>
+            </tr>
+            {% for user in top_users %}
+            <tr>
+                <td style="padding-left:20px">{{ user.username }}</td>
+                <td>{{ user.rating }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    </div>
+</div>
+<div class="sidebar-module sidebar-module-inset">
+    <h3>Популярные теги:</h3>
+    <div style="min-height: 150px;">
+    {% if top_tags %}
+        {% for tag in top_tags %}
+            <a href="/tag/{{ tag.slug }}/" style="font-size:{{ tag.size }}">{{ tag.tag }}</a>
+        {% endfor %}
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

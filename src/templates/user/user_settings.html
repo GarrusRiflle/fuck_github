@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+
+{% block title %} Настройки {% endblock %}
+
+{% block main_content %}
+
+<div style="width: 600px; margin-left: 100px; margin-top: 20px">
+    <form method="POST" action="/profile/settings/" accept-charset="UTF-8">
+        {% csrf_token %}
+        <legend>Изменить пароль</legend>
+        {% if password_error %}
+                <label class="alert alert-danger">{{ password_error }}</label>
+        {% endif %}
+        {% if password_success %}
+                <label class="alert alert-success">{{ password_success }}</label>
+        {% endif %}
+        <input type="password" id="old_password" class="form-control" name="old_password" placeholder="Старый пароль" style="display: block; margin: 10px auto; height: 35px; width: 200px;">
+        <input type="password" id="password" class="form-control" name="password" placeholder="Новый пароль" style="display: block; margin: 10px auto; height: 35px; width: 200px;">
+        <input type="password" id="password1" class="form-control" name="password1" placeholder="Повторите пароль" style="display: block; margin: 10px auto; height: 35px; width: 200px;">
+        <button type="submit" name="change-password" class="btn btn-info btn-block" style="width: 200px; margin: 10px auto;">Изменить пароль</button>
+    </form>
+    <form method="POST" action="/profile/settings/" accept-charset="UTF-8">
+        {% csrf_token %}
+        <legend>Изменить электронную почту</legend>
+        {% if email_error %}
+                <label class="alert alert-danger">{{ email_error }}</label>
+        {% endif %}
+        {% if email_success %}
+                <label class="alert alert-success">{{ email_success }}</label>
+        {% endif %}
+        <p style="margin-left: 16%">Текущий адрес: {{ email }}</p>
+        <input type="email" id="email" class="form-control" name="email" placeholder="Новый адрес" style="display: block; margin: 10px auto; height: 35px; width: 200px;">
+        <button type="submit" name="change-email" class="btn btn-info btn-block" style="width: 200px; margin: 10px auto;">Изменить адрес</button>
+    </form>
+    <form method="POST" action="/profile/settings/" enctype="multipart/form-data" accept-charset="UTF-8">
+        {% csrf_token %}
+        <legend>Загрузить новую фотографию</legend>
+        {% if photo_error %}
+                <label class="alert alert-danger">{{ photo_error }}</label>
+        {% endif %}
+        <p>Вы можете загрузить изображение в формате JPG, GIF или PNG.</p>
+        <input id="id_image" name="image" type="file" accept="image/*" style="width: 300px; margin: 10px auto;">
+        <button type="submit" name="change-photo" class="btn btn-info btn-block" style="width: 200px; margin: 10px auto;">Изменить фотографию</button>
+        <p>Если у Вас возникают проблемы с загрузкой, попробуйте выбрать фотографию меньшего размера</p>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block title %} Профиль {% endblock %}
+
+{% block main_content %}
+<div style="width: 650px; margin-left: 100px">
+	<div style="width: 150px; height: 100%; display: inline-block;">
+		<img src="/{{ user.avatar }}" class="bordered" width="140px" style="margin-top: 50px; margin-left:-20px"/>
+	</div>
+	<div style="width: 450px; height: 100%; display: inline-block; vertical-align: top; padding-top: 20px;">
+		<legend><h2>{{ username }}</h2></legend>
+        <h3>Рейтинг: {{ rating }}</h3>
+        {% if user.username == USER.username %}
+            <h4><a href="/profile/questions/">Вопросы({{ questions_size }})</a></h4>
+            <h4><a href="/profile/answers/">Ответы({{ answers_size }})</a></h4>
+        {% else %}
+            <h4><a href="#">Вопросы({{ questions_size }})</a></h4>
+            <h4><a href="#">Ответы({{ answers_size }})</a></h4>
+        {% endif %}
+	</div>
+</div>
+{% endblock %}

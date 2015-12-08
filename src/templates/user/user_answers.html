@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block title %} Мои ответы {% endblock %}
+
+{% block main_content %}
+	<h1>Мои ответы</h1>
+    {% for comment in comments %}
+        <div style="width: 650px; margin: 15px 0 0 20px;">
+            <legend>К вопросу: <a href="/question/{{ comment.question.id }}">{{ comment.question.title }}</a></legend>
+            <h4 style="margin-left: 40px">{{ comment.text }}</h4>
+        </div>
+    {% endfor %}
+{% endblock %}
